@@ -1,0 +1,33 @@
+name: audit-log
+stack: hotel
+description: "Audit Log Service"
+ingress: True
+Edge: false
+project:
+  endpoint:
+    container_port: 3000
+    expose_port: 80
+
+maintainer:
+  id: Fatemeh Ahmadi
+  email: fat.ahmadi@alibaba.ir
+
+resources:
+  staging:
+    requests:
+      memory: "250Mi"
+      cpu: "200m"
+      minReplica: 1
+    limits:
+      memory: "500Mi"
+      cpu: "400m"
+      maxReplica: 1
+  production:
+    requests:
+      memory: "500Mi"
+      cpu: "300m"
+      minReplica: 1
+    limits:
+      memory: "750Mi"
+      cpu: "600m"
+      maxReplica: 1

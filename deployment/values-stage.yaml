@@ -1,0 +1,22 @@
+application:
+  Type: "Deployment"
+
+strategy:
+  type: RollingUpdate
+image:
+  pullPolicy: IfNotPresent
+  imagePullSecrets:
+    name: indraprojecthub
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 3000
+
+envFrom:
+  - configMapRef:
+      name: audit-log-configmap
+  - secretRef:
+      name: audit-log-secret

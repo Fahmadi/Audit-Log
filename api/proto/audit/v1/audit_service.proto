@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package audit.v1;
+
+import "google/protobuf/timestamp.proto";
+
+service AuditService{
+    rpc ListAuditLogsByUserID(ListAuditLogsByUserIDRequest) returns (ListAuditLogsByUserIDResponse){}
+    rpc ListAuditLogsByEntityID(ListAuditLogsByEntityIDRequest) returns(ListAuditLogsByEntityIDResponse){}
+}
+  
+message ListAuditLogsByUserIDRequest {
+    string user_id = 1;
+    Page page = 2;
+}
+
+message ListAuditLogsByUserIDResponse {
+  repeated Audit audits = 1;
+  Page page = 2;
+
+}
+
+message ListAuditLogsByEntityIDRequest {
+  string entity_id = 1;
+  string entity = 2;
+  Page page = 3;
+}
+
+message ListAuditLogsByEntityIDResponse{
+  repeated Audit audits = 1;
+  Page page = 2;
+
+}
+
+message Audit {
+    string action = 2;
+    string user_id=3;
+    string entity = 4;
+    google.protobuf.Timestamp timestamp = 5;
+    string message = 6;
+  }
+
+message Page {
+    uint32 page = 1;
+    uint32 size = 2;
+    uint32 total = 3;
+  }

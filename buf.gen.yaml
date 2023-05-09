@@ -1,0 +1,23 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: auditLog/internal/proto
+
+plugins:
+  - name: go
+    out: internal/proto
+    opt: paths=source_relative
+  - name: go-grpc
+    out: internal/proto
+    opt:
+      - paths=source_relative
+      - require_unimplemented_servers=true
+  - name: grpc-gateway
+    out: internal/proto
+    opt: paths=source_relative
+  - name: openapiv2
+    out: swagger
+    opt: allow_merge=true,output_format=json
+    strategy: all
+
